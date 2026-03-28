@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swiss Working Dev — Applications web sur mesure</title>
+    <meta name="description" content="Swiss Working Dev développe des applications web professionnelles pour les entreprises suisses. Caisse, livraison, gestion de flotte, pointage.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="container nav-inner">
+            <a href="#" class="nav-logo">
+                <span class="logo-swiss">Swiss</span><span class="logo-working">Working</span><span class="logo-dev">Dev</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#apps">Applications</a></li>
+                <li><a href="#about">À propos</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="nav-toggle" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero" id="hero">
+        <div class="container hero-inner">
+            <div class="hero-badge">Made in Switzerland</div>
+            <h1>Applications web<br><span class="text-accent">sur mesure</span></h1>
+            <p class="hero-sub">Nous concevons des solutions SaaS performantes pour les entreprises suisses. De la caisse enregistreuse à la gestion de flotte, nos outils simplifient votre quotidien.</p>
+            <a href="#apps" class="btn btn-primary">Découvrir nos applications</a>
+        </div>
+    </header>
+
+    <!-- Applications -->
+    <section class="section" id="apps">
+        <div class="container">
+            <h2 class="section-title">Nos Applications</h2>
+            <p class="section-sub">Des outils pensés pour les professionnels suisses</p>
+
+            <div class="apps-grid">
+
+                <!-- WalkPOS -->
+                <article class="app-card" data-animate>
+                    <div class="app-icon" style="background: linear-gradient(135deg, #E63946, #c1121f);">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M12 17v4"/><path d="M8 21h8"/>
+                        </svg>
+                    </div>
+                    <h3>WalkPOS</h3>
+                    <p>Logiciel de caisse tout-en-un pour la restauration. Caisse tactile, écran cuisine, commandes QR, réservations et fidélité.</p>
+                    <ul class="app-tags">
+                        <li>Restauration</li>
+                        <li>Caisse</li>
+                        <li>Commandes en ligne</li>
+                    </ul>
+                    <a href="https://walkpos.swissworkingdev.ch" target="_blank" rel="noopener" class="btn btn-outline">Découvrir →</a>
+                </article>
+
+                <!-- GestMat -->
+                <article class="app-card" data-animate>
+                    <div class="app-icon" style="background: linear-gradient(135deg, #2a9d8f, #264653);">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/>
+                        </svg>
+                    </div>
+                    <h3>GestMat</h3>
+                    <p>Gestion de flotte et matériel en mode SaaS. Suivez vos équipements, véhicules et actifs depuis une interface centralisée.</p>
+                    <ul class="app-tags">
+                        <li>Flotte</li>
+                        <li>Matériel</li>
+                        <li>SaaS</li>
+                    </ul>
+                    <a href="https://gestmat.swissworkingdev.ch" target="_blank" rel="noopener" class="btn btn-outline">Découvrir →</a>
+                </article>
+
+                <!-- Swiss Livraison Pro -->
+                <article class="app-card" data-animate>
+                    <div class="app-icon" style="background: linear-gradient(135deg, #e76f51, #f4a261);">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/>
+                        </svg>
+                    </div>
+                    <h3>Swiss Livraison Pro</h3>
+                    <p>Plateforme de gestion de livraison. Dispatch intelligent, suivi GPS en temps réel, intégration multi-plateformes.</p>
+                    <ul class="app-tags">
+                        <li>Livraison</li>
+                        <li>GPS</li>
+                        <li>Multi-plateforme</li>
+                    </ul>
+                    <a href="https://swisslivraisonpro.ch" target="_blank" rel="noopener" class="btn btn-outline">Découvrir →</a>
+                </article>
+
+                <!-- Pointeo -->
+                <article class="app-card" data-animate>
+                    <div class="app-icon" style="background: linear-gradient(135deg, #457b9d, #1d3557);">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <h3>Pointeo</h3>
+                    <p>Gestion du temps de travail simplifiée. Planning visuel, pointage rapide (PIN, QR, mobile), export paie automatisé.</p>
+                    <ul class="app-tags">
+                        <li>Pointage</li>
+                        <li>Planning</li>
+                        <li>Paie</li>
+                    </ul>
+                    <a href="https://pointeo.swissworkingdev.ch" target="_blank" rel="noopener" class="btn btn-outline">Découvrir →</a>
+                </article>
+
+            </div>
+
+            <p class="apps-note">D'autres applications sont en cours de développement.</p>
+        </div>
+    </section>
+
+    <!-- À propos -->
+    <section class="section section-alt" id="about">
+        <div class="container about-inner">
+            <h2 class="section-title">À propos</h2>
+            <div class="about-content">
+                <p><strong>Swiss Working Dev</strong> conçoit et développe des applications web professionnelles destinées aux entreprises suisses. Nos solutions SaaS sont pensées pour simplifier les opérations quotidiennes : gestion de caisse, livraison, suivi de matériel ou pointage du personnel.</p>
+                <p>Basés en Suisse, nous mettons un point d'honneur à offrir des outils fiables, conformes aux exigences locales et accessibles sur tous les appareils.</p>
+                <div class="about-stats">
+                    <div class="stat">
+                        <span class="stat-number">4</span>
+                        <span class="stat-label">Applications</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">SaaS</span>
+                        <span class="stat-label">100% cloud</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">CH</span>
+                        <span class="stat-label">Made in Switzerland</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section" id="contact">
+        <div class="container contact-inner">
+            <h2 class="section-title">Contact</h2>
+            <p class="section-sub">Une question, un projet ? Écrivez-nous.</p>
+            <div class="contact-box">
+                <a href="mailto:contact@swissworkingdev.ch" class="btn btn-primary btn-lg">contact@swissworkingdev.ch</a>
+                <p class="contact-note">Nous vous répondons sous 24h.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <span class="logo-swiss">Swiss</span><span class="logo-working">Working</span><span class="logo-dev">Dev</span>
+            </div>
+            <p>&copy; 2026 Swiss Working Dev. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
