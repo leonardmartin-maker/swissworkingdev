@@ -1,4 +1,4 @@
 AuthType Basic
 AuthName "Acces restreint"
-AuthUserFile /home/clients/de5ap/sites/swissworkingdev.ch/.htpasswd
+AuthUserFile .htpasswd
 Require valid-user
