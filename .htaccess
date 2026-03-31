@@ -1,1 +1,4 @@
-# temporarily disabled
+AuthType Basic
+AuthName "Acces restreint"
+AuthUserFile /home/clients/7e5bb2806129d338db75ebf75188b324/sites/swissworkingdev.ch/.htpasswd
+Require valid-user
