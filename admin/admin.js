@@ -47,7 +47,8 @@ const defaultData = {
         { id: 'walkpos', name: 'WalkPOS', icon: 'bi-display', color: '#E63946', url: 'https://walkpos.swissworkingdev.ch', status: 'live', version: '1.0.0', description: 'Logiciel de caisse tout-en-un' },
         { id: 'gestmat', name: 'GestMat', icon: 'bi-geo-alt-fill', color: '#2a9d8f', url: 'https://gestmat.swissworkingdev.ch', status: 'dev', version: '0.5.0', description: 'Gestion de flotte et materiel SaaS' },
         { id: 'slp', name: 'Swiss Livraison Pro', icon: 'bi-truck', color: '#e76f51', url: 'https://swisslivraisonpro.ch', status: 'live', version: '2.1.0', description: 'Plateforme de gestion de livraison' },
-        { id: 'pointeo', name: 'Pointeo', icon: 'bi-clock-fill', color: '#457b9d', url: 'https://pointeo.swissworkingdev.ch', status: 'dev', version: '0.2.0', description: 'Gestion du temps de travail' }
+        { id: 'pointeo', name: 'Pointeo', icon: 'bi-clock-fill', color: '#457b9d', url: 'https://pointeo.swissworkingdev.ch', status: 'dev', version: '0.2.0', description: 'Gestion du temps de travail' },
+        { id: 'pilotage', name: 'Pilotage Quotidien', icon: 'bi-clipboard2-check-fill', color: '#4f46e5', url: 'https://pilotage.swissworktogether.ch', status: 'live', version: '1.0.0', description: 'Pilotage quotidien des taches d\'equipe' }
     ],
     subscriptions: [],
     servers: [
@@ -60,7 +61,7 @@ const defaultData = {
     clientsHistory: []
 };
 
-const DATA_VERSION = 2; // Increment to force reset
+const DATA_VERSION = 3; // Increment to force reset
 
 function loadData() {
     const storedVersion = localStorage.getItem(STORAGE_KEY + '_v');
