@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>SWD Super Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- Login -->
+<div class="login-screen" id="loginScreen">
+    <div class="login-box">
+        <div class="login-logo"><span class="s">Swiss</span><span class="w">Working</span><span class="d">Dev</span></div>
+        <h2>Super Admin</h2>
+        <div class="login-error" id="loginError">Mot de passe incorrect</div>
+        <input type="password" id="pwd" placeholder="Mot de passe" onkeydown="if(event.key==='Enter')doLogin()" autofocus>
+        <button onclick="doLogin()"><i class="bi bi-shield-lock-fill"></i> Connexion</button>
+    </div>
+</div>
+
+<!-- Dashboard -->
+<div class="dashboard" id="dashboard">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span class="sidebar-logo"><span class="s">S</span><span class="w">W</span><span class="d">D</span></span>
+            <span class="sidebar-title">Super Admin</span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active" data-section="overview">
+                <i class="bi bi-grid-1x2-fill"></i> Vue d'ensemble
+            </a>
+            <a href="#" class="nav-item" data-section="apps">
+                <i class="bi bi-box-seam-fill"></i> Applications
+            </a>
+            <a href="#" class="nav-item" data-section="subscriptions">
+                <i class="bi bi-credit-card-fill"></i> Abonnements
+            </a>
+            <a href="#" class="nav-item" data-section="stats">
+                <i class="bi bi-bar-chart-fill"></i> Statistiques
+            </a>
+            <a href="#" class="nav-item" data-section="servers">
+                <i class="bi bi-hdd-stack-fill"></i> Serveurs
+            </a>
+            <a href="#" class="nav-item" data-section="settings">
+                <i class="bi bi-gear-fill"></i> Configuration
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="/" class="nav-item"><i class="bi bi-arrow-left"></i> Retour au site</a>
+            <a href="#" class="nav-item" onclick="doLogout()"><i class="bi bi-box-arrow-left"></i> Deconnexion</a>
+        </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+        <header class="topbar">
+            <button class="menu-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">
+                <i class="bi bi-list"></i>
+            </button>
+            <h1 id="pageTitle">Vue d'ensemble</h1>
+            <div class="topbar-right">
+                <span class="topbar-date" id="currentDate"></span>
+                <span class="topbar-user"><i class="bi bi-person-circle"></i> Admin</span>
+            </div>
+        </header>
+
+        <!-- Section: Overview -->
+        <section class="content-section active" id="sec-overview">
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background:linear-gradient(135deg,#E63946,#c1121f)"><i class="bi bi-box-seam-fill"></i></div>
+                    <div class="kpi-data">
+                        <span class="kpi-value" id="kpiApps">4</span>
+                        <span class="kpi-label">Applications</span>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background:linear-gradient(135deg,#2a9d8f,#264653)"><i class="bi bi-people-fill"></i></div>
+                    <div class="kpi-data">
+                        <span class="kpi-value" id="kpiClients">0</span>
+                        <span class="kpi-label">Clients actifs</span>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background:linear-gradient(135deg,#e76f51,#f4a261)"><i class="bi bi-currency-exchange"></i></div>
+                    <div class="kpi-data">
+                        <span class="kpi-value" id="kpiMRR">CHF 0</span>
+                        <span class="kpi-label">MRR</span>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background:linear-gradient(135deg,#457b9d,#1d3557)"><i class="bi bi-check-circle-fill"></i></div>
+                    <div class="kpi-data">
+                        <span class="kpi-value" id="kpiUptime">99.9%</span>
+                        <span class="kpi-label">Uptime</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Revenus mensuels</h3>
+                        <span class="badge badge-green">+12%</span>
+                    </div>
+                    <div class="chart-container"><canvas id="chartRevenue"></canvas></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Clients par application</h3>
+                    </div>
+                    <div class="chart-container"><canvas id="chartClients"></canvas></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>Activite recente</h3>
+                </div>
+                <div class="activity-list" id="activityList"></div>
+            </div>
+        </section>
+
+        <!-- Section: Applications -->
+        <section class="content-section" id="sec-apps">
+            <div class="card-header-bar">
+                <h3>Toutes les applications</h3>
+                <button class="btn btn-sm" onclick="openModal('addApp')"><i class="bi bi-plus-lg"></i> Ajouter</button>
+            </div>
+            <div class="apps-table-wrap">
+                <table class="data-table" id="appsTable">
+                    <thead>
+                        <tr>
+                            <th>Application</th>
+                            <th>Status</th>
+                            <th>Clients</th>
+                            <th>MRR</th>
+                            <th>Version</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="appsBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section: Subscriptions -->
+        <section class="content-section" id="sec-subscriptions">
+            <div class="card-header-bar">
+                <h3>Abonnements</h3>
+                <div class="filter-group">
+                    <select id="subFilterApp" onchange="renderSubscriptions()">
+                        <option value="all">Toutes les apps</option>
+                    </select>
+                    <select id="subFilterStatus" onchange="renderSubscriptions()">
+                        <option value="all">Tous les statuts</option>
+                        <option value="active">Actif</option>
+                        <option value="trial">Essai</option>
+                        <option value="expired">Expire</option>
+                        <option value="cancelled">Annule</option>
+                    </select>
+                </div>
+            </div>
+            <div class="apps-table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Client</th>
+                            <th>Application</th>
+                            <th>Plan</th>
+                            <th>Prix/mois</th>
+                            <th>Status</th>
+                            <th>Debut</th>
+                            <th>Prochain paiement</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="subsBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section: Stats -->
+        <section class="content-section" id="sec-stats">
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background:linear-gradient(135deg,#6366f1,#818cf8)"><i class="bi bi-graph-up-arrow"></i></div>
+                    <div class="kpi-data">
+                        <span class="kpi-value" id="kpiARR">CHF 0</span>
+                        <span class="kpi-label">ARR</span>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background:linear-gradient(135deg,#ec4899,#f472b6)"><i class="bi bi-percent"></i></div>
+                    <div class="kpi-data">
+                        <span class="kpi-value" id="kpiChurn">0%</span>
+                        <span class="kpi-label">Churn</span>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background:linear-gradient(135deg,#f59e0b,#fbbf24)"><i class="bi bi-cash-stack"></i></div>
+                    <div class="kpi-data">
+                        <span class="kpi-value" id="kpiARPU">CHF 0</span>
+                        <span class="kpi-label">ARPU</span>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background:linear-gradient(135deg,#10b981,#34d399)"><i class="bi bi-person-plus-fill"></i></div>
+                    <div class="kpi-data">
+                        <span class="kpi-value" id="kpiNewClients">0</span>
+                        <span class="kpi-label">Nouveaux ce mois</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-header"><h3>Evolution des clients</h3></div>
+                    <div class="chart-container"><canvas id="chartGrowth"></canvas></div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><h3>Revenus par application</h3></div>
+                    <div class="chart-container"><canvas id="chartRevenueByApp"></canvas></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Servers -->
+        <section class="content-section" id="sec-servers">
+            <div class="card-header-bar"><h3>Infrastructure</h3></div>
+            <div class="server-grid" id="serverGrid"></div>
+        </section>
+
+        <!-- Section: Settings -->
+        <section class="content-section" id="sec-settings">
+            <div class="card">
+                <div class="card-header"><h3>Configuration generale</h3></div>
+                <div class="settings-form">
+                    <div class="form-group">
+                        <label>Mot de passe admin</label>
+                        <input type="password" id="settingsPassword" placeholder="Nouveau mot de passe">
+                        <button class="btn btn-sm" onclick="changePassword()">Modifier</button>
+                    </div>
+                    <div class="form-group">
+                        <label>Notifications email</label>
+                        <input type="email" id="settingsEmail" placeholder="admin@swissworkingdev.ch">
+                    </div>
+                    <div class="form-group">
+                        <label>Alertes Stripe</label>
+                        <label class="toggle">
+                            <input type="checkbox" id="settingsStripeAlerts" checked>
+                            <span class="toggle-slider"></span>
+                            Recevoir les alertes de paiement
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="card" style="margin-top:1rem">
+                <div class="card-header"><h3>Donnees</h3></div>
+                <div class="settings-actions">
+                    <button class="btn btn-sm" onclick="exportData()"><i class="bi bi-download"></i> Exporter les donnees (JSON)</button>
+                    <label class="btn btn-sm">
+                        <i class="bi bi-upload"></i> Importer
+                        <input type="file" accept=".json" onchange="importData(event)" style="display:none">
+                    </label>
+                </div>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+    <div class="modal" onclick="event.stopPropagation()">
+        <div class="modal-header">
+            <h3 id="modalTitle">Ajouter</h3>
+            <button class="modal-close" onclick="closeModal()"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <div class="modal-body" id="modalBody"></div>
+    </div>
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>
