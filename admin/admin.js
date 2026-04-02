@@ -49,56 +49,33 @@ const defaultData = {
         { id: 'slp', name: 'Swiss Livraison Pro', icon: 'bi-truck', color: '#e76f51', url: 'https://swisslivraisonpro.ch', status: 'live', version: '2.1.0', description: 'Plateforme de gestion de livraison' },
         { id: 'pointeo', name: 'Pointeo', icon: 'bi-clock-fill', color: '#457b9d', url: 'https://pointeo.swissworkingdev.ch', status: 'dev', version: '0.2.0', description: 'Gestion du temps de travail' }
     ],
-    subscriptions: [
-        { id: 1, client: 'Restaurant Le Lac', email: 'contact@lelac.ch', app: 'walkpos', plan: 'Pro', price: 89, status: 'active', start: '2025-11-01', nextPayment: '2026-05-01' },
-        { id: 2, client: 'Pizzeria Roma', email: 'info@pizzeriaroma.ch', app: 'walkpos', plan: 'Starter', price: 49, status: 'active', start: '2026-01-15', nextPayment: '2026-05-15' },
-        { id: 3, client: 'Cafe Central', email: 'admin@cafecentral.ch', app: 'walkpos', plan: 'Pro', price: 89, status: 'trial', start: '2026-03-20', nextPayment: '2026-04-20' },
-        { id: 4, client: 'FleetExpress SA', email: 'ops@fleetexpress.ch', app: 'slp', plan: 'Business', price: 199, status: 'active', start: '2025-09-01', nextPayment: '2026-05-01' },
-        { id: 5, client: 'QuickDeliver GmbH', email: 'info@quickdeliver.ch', app: 'slp', plan: 'Starter', price: 99, status: 'active', start: '2026-02-01', nextPayment: '2026-05-01' },
-        { id: 6, client: 'BuildTech AG', email: 'fleet@buildtech.ch', app: 'gestmat', plan: 'Beta', price: 0, status: 'trial', start: '2026-03-01', nextPayment: '2026-04-01' }
-    ],
+    subscriptions: [],
     servers: [
         { name: 'VPS HubPro / SLP', ip: '83.228.223.123', provider: 'Infomaniak', os: 'Ubuntu 22.04', cpu: 45, ram: 62, disk: 38, status: 'online' },
         { name: 'Infomaniak Web', ip: 'de5ap.ftp.infomaniak.com', provider: 'Infomaniak', os: 'Shared Hosting', cpu: 12, ram: 25, disk: 15, status: 'online' },
         { name: 'PostgreSQL (HubPro)', ip: '127.0.0.1:5432', provider: 'VPS Local', os: 'PostgreSQL 15', cpu: 30, ram: 48, disk: 22, status: 'online' }
     ],
-    activity: [
-        { text: 'Nouveau client: Cafe Central (WalkPOS trial)', color: '#4ade80', time: '2h' },
-        { text: 'Paiement recu: FleetExpress SA — CHF 199', color: '#818cf8', time: '5h' },
-        { text: 'Deploy: WalkPOS v1.0.0 en production', color: '#fbbf24', time: '1j' },
-        { text: 'Paiement recu: Pizzeria Roma — CHF 49', color: '#818cf8', time: '2j' },
-        { text: 'Nouveau client: QuickDeliver GmbH (SLP)', color: '#4ade80', time: '5j' },
-        { text: 'Deploy: Swiss Livraison Pro v2.1.0', color: '#fbbf24', time: '1sem' },
-        { text: 'Paiement recu: Restaurant Le Lac — CHF 89', color: '#818cf8', time: '1sem' }
-    ],
-    revenueHistory: [
-        { month: 'Oct', value: 199 },
-        { month: 'Nov', value: 288 },
-        { month: 'Dec', value: 288 },
-        { month: 'Jan', value: 337 },
-        { month: 'Fev', value: 436 },
-        { month: 'Mar', value: 525 }
-    ],
-    clientsHistory: [
-        { month: 'Oct', value: 1 },
-        { month: 'Nov', value: 2 },
-        { month: 'Dec', value: 2 },
-        { month: 'Jan', value: 3 },
-        { month: 'Fev', value: 5 },
-        { month: 'Mar', value: 6 }
-    ]
+    activity: [],
+    revenueHistory: [],
+    clientsHistory: []
 };
 
+const DATA_VERSION = 2; // Increment to force reset
+
 function loadData() {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-        try {
-            return JSON.parse(stored);
-        } catch (e) {
-            return { ...defaultData };
+    const storedVersion = localStorage.getItem(STORAGE_KEY + '_v');
+    if (storedVersion && parseInt(storedVersion) === DATA_VERSION) {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) {
+            try {
+                return JSON.parse(stored);
+            } catch (e) {
+                return JSON.parse(JSON.stringify(defaultData));
+            }
         }
     }
-    return { ...defaultData };
+    localStorage.setItem(STORAGE_KEY + '_v', DATA_VERSION);
+    return JSON.parse(JSON.stringify(defaultData));
 }
 
 function saveData(data) {
